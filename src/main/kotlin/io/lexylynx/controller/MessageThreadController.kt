@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.lexylynx.utils.KeyManager
 import io.lexylynx.utils.KeyManager.SecureKey
-import lombok.extern.slf4j.Slf4j
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -19,7 +18,6 @@ inline fun <reified T> T.logger(): Logger {
 
 @RestController
 @RequestMapping("/threads")
-@Slf4j
 class MessageThreadController(private val keyManager: KeyManager) {
 
     val log = logger()

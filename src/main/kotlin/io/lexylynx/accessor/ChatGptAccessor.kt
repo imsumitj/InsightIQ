@@ -1,71 +1,62 @@
 package io.lexylynx.accessor
 
-import com.aallam.openai.api.BetaOpenAI
-import com.aallam.openai.api.chat.*
-import com.aallam.openai.api.model.ModelId
-import com.aallam.openai.client.OpenAI
 import io.lexylynx.controller.logger
 import io.lexylynx.utils.KeyManager
 import io.lexylynx.utils.KeyManager.SecureKey
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
-import java.net.URL
-import kotlin.time.ExperimentalTime
+import org.springframework.web.client.RestTemplate
 
 @Component
 class ChatGptAccessor(private val keyManager: KeyManager) {
     private val log = logger()
 
-    private val endpointUrl = "https://api.openai.com/v1/engines/davinci-codex/completions"
+    /*
+        API references:
+        1. https://platform.openai.com/docs/libraries/community-libraries
+        2. https://platform.openai.com/docs/api-reference/chat
+        3. API keys: https://platform.openai.com/account/api-keys
+     */
 
-    @OptIn(BetaOpenAI::class)
+    private val endpointUrl = "https://api.openai.com/v1/completions"
+
+
     fun sendMessage(threadId: String, prompt: String): String {
-        val requestBody = buildRequestBody(prompt)
         val key = keyManager.getKey(threadId)
-        return sendRequest(requestBody, key)
+        return sendRequest(prompt, key)
     }
 
-    private fun buildRequestBody(prompt: String): String {
-        return """
-            {
-                "prompt": "$prompt",
-                "max_tokens": 500
-            }
-        """.trimIndent()
-    }
+    private fun sendRequest(prompt: String, key: SecureKey): String {
+        val restTemplate = RestTemplate()
+        val headers = HttpHeaders()
+        headers.set("Content-Type", "application/json")
+        headers.set("Authorization", "Bearer ${key.getKey()}")
 
-    private fun sendRequest(requestBody: String, key: SecureKey): String {
-        val url = URL(endpointUrl)
-        val connection = url.openConnection() as HttpURLConnection
-        connection.requestMethod = "POST"
-        connection.setRequestProperty("Content-Type", "application/json")
-        connection.setRequestProperty("Authorization", "Bearer ${key.getKey()}")
+        val body = mapOf(
+            "model" to "text-davinci-003",
+            "prompt" to prompt,
+            "max_tokens" to 500,
+            "temperature" to 0
+        )
 
-        connection.doOutput = true
-        val writer = OutputStreamWriter(connection.outputStream)
-        writer.write(requestBody)
-        writer.flush()
+        val httpEntity = HttpEntity(body, headers)
 
-        val responseCode = connection.responseCode
-        val response = StringBuilder()
+        val responseEntity: ResponseEntity<String> = restTemplate.exchange(
+            endpointUrl,
+            HttpMethod.POST,
+            httpEntity,
+            String::class.java
+        )
 
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            val reader = BufferedReader(InputStreamReader(connection.inputStream))
-            var line: String? = reader.readLine()
-
-            while (line != null) {
-                response.append(line)
-                line = reader.readLine()
-            }
+        return if (responseEntity.statusCode.is2xxSuccessful) {
+            responseEntity.body.toString()
         } else {
-            println("Error: HTTP request failed with response code $responseCode")
+            println("Error: HTTP request failed with response code ${responseEntity.statusCode}")
+            ""
         }
-
-        connection.disconnect()
-        return response.toString()
     }
 }
 
