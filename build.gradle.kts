@@ -13,10 +13,19 @@ repositories {
 }
 
 dependencies {
-//    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.10")
-//    implementation("org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.5.10")
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.0")
+
+    implementation("org.springframework.boot:spring-boot-starter-logging")
+    implementation("org.slf4j:jul-to-slf4j")
+    implementation("org.slf4j:slf4j-api:1.7.30")
+    implementation("ch.qos.logback:logback-classic:1.2.3")
+
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.xerial:sqlite-jdbc:3.36.0")
+
+    // OPen AI kotlin
+    //    implementation("com.aallam.openai:openai-client:3.2.4")
     // Unit test
     testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")

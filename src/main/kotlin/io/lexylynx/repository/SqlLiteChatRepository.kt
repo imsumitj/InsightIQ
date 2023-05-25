@@ -14,14 +14,17 @@ class SqlLiteChatRepository : ChatRepository {
     }
 
     private fun createChatHistoryTable() {
-        TODO()
+        //TODO()
     }
 
-    override fun storeChatMessage(user: String, message: String) {
-        TODO("To be implemented")
+    override fun storeChatMessage(threadId: String, message: String, response: String) {
+        // TODO("To be implemented")
+        println("Call the storeChat for threadId: $threadId with message: $message")
     }
 
     override fun getChatHistory(): List<ChatMessage> {
-        TODO("To be implemented")
+        // TODO("To be implemented")
+        println("chat history call")
+        return mutableListOf()
     }
 }

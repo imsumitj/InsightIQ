@@ -1,8 +1,9 @@
 package io.lexylynx.model
 
-data class ChatMessage(
-    val id: String,
-    val timestamp: String,
-    val user: String,
-    val message: String
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class ChatMessage @JsonCreator constructor(
+    @JsonProperty("threadId") val threadId: String,
+    @JsonProperty("message") val message: String
 )
