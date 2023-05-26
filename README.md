@@ -54,3 +54,16 @@ Build contextual querying mechanism on top of data stored in the vector db
 #### Milestone 3:
 Integration with LLM to pass the queries and contextual data to get meaningful result
 
+
+### Current state:
+#### Git tag v0.1: ChatGPT integration complete
+1. Setup `OPENAI_API_KEY` environment variable 
+2. Run the SpringBoot server by running command `./gradlew run`
+3. A `test` thread is created by default for now
+4. Run below curl command to make a call to ChatGPT.
+    ```shell
+    curl -X POST -H "Content-Type: application/json" -d '{
+    "message": "Why do programmers prefer dark mode? Because light attracts bugs?",
+    "threadId": "test"
+    }' http://localhost:3001/chat/message
+   ```
