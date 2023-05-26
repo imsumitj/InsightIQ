@@ -14,20 +14,6 @@ These tenets guide the development of InsightIQ, ensuring a privacy-centric appr
 experience, flexibility with LLMs, and the ability to incorporate personal data from multiple sources to enrich the
 knowledge management capabilities
 
-
-### Background
-I organize all the personal notes and documents using org-roam (within Emacs). These notes are encrypted using gpg
-and git-crypt
-and I store them on AWS using CodeCommit service. This setup has helped me create a secure way to build a knowledge
-management system. Over years I have created hundreds of personal notes related to finances, travel, new things that
-learn but the system lacks intelligent management and ingestion of data. For example, for this project I did
-research on best way to create a service locally which then can be moved into cloud. All the articles I read about
-this or the queries that made to ChatGPT are lost and I cannot build upon the previous research. What if there is an
-easy way to ingest finding while working on such task easily into a system which stores it and classifies that data
-to build a knowledge base that can be used for future queries.
-
-
-
 ## Background
 
 I have been using org-roam within Emacs to organize all my personal notes and documents securely. These notes are encrypted using gpg and git-crypt, and I store them on AWS using the CodeCommit service. This setup has provided me with a secure way to build a knowledge management system over the years.
@@ -46,7 +32,7 @@ Therefore, the aim of InsightIQ project is to bridge these gaps by:
 The goal of InsightIQ is to create an intelligent knowledge management system that simplifies data ingestion, improves organization, and delivers accurate information to users.
 
 
-### How?
+## How?
 #### Milestone 1:
 Build a service that can be run locally (or in cloud in future) that ingests data into a vector db
 #### Milestone 2: 
@@ -55,7 +41,7 @@ Build contextual querying mechanism on top of data stored in the vector db
 Integration with LLM to pass the queries and contextual data to get meaningful result
 
 
-### Current state:
+## Current state:
 #### Git tag v0.1: ChatGPT integration complete
 1. Setup `OPENAI_API_KEY` environment variable 
 2. Run the SpringBoot server by running command `./gradlew run`
