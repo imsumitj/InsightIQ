@@ -13,3 +13,44 @@ and storage to prioritize user data privacy and security.
 These tenets guide the development of InsightIQ, ensuring a privacy-centric approach, a secure and intuitive user
 experience, flexibility with LLMs, and the ability to incorporate personal data from multiple sources to enrich the
 knowledge management capabilities
+
+
+### Background
+I organize all the personal notes and documents using org-roam (within Emacs). These notes are encrypted using gpg
+and git-crypt
+and I store them on AWS using CodeCommit service. This setup has helped me create a secure way to build a knowledge
+management system. Over years I have created hundreds of personal notes related to finances, travel, new things that
+learn but the system lacks intelligent management and ingestion of data. For example, for this project I did
+research on best way to create a service locally which then can be moved into cloud. All the articles I read about
+this or the queries that made to ChatGPT are lost and I cannot build upon the previous research. What if there is an
+easy way to ingest finding while working on such task easily into a system which stores it and classifies that data
+to build a knowledge base that can be used for future queries.
+
+
+
+## Background
+
+I have been using org-roam within Emacs to organize all my personal notes and documents securely. These notes are encrypted using gpg and git-crypt, and I store them on AWS using the CodeCommit service. This setup has provided me with a secure way to build a knowledge management system over the years.
+
+Throughout my journey, I have accumulated hundreds of personal notes covering various topics such as finances, travel, and new things I've learned. While the system provides a secure and organized way to store my knowledge, it lacks intelligent management and data ingestion capabilities.
+
+For instance, during my research on the best approach to creating a local service that can later be moved to the cloud, I came across numerous articles and queries to ChatGPT. Unfortunately, this valuable information is scattered and not easily accessible for future reference. It would be incredibly beneficial to have a system that allows me to easily ingest and classify such findings, building a comprehensive knowledge base for future queries.
+
+Therefore, the aim of InsightIQ project is to bridge these gaps by:
+
+1.    Enable easy ingestion of personal data, including research findings.
+2.    Build a personal storage system using a vector database for efficient classification.
+3.    Develop a Contextual Querying mechanism to retrieve relevant data based on techniques like keyword matching and semantic search.
+4.    Integrate powerful Large Language Models (LLMs) to enhance accuracy and provide meaningful results to users.
+
+The goal of InsightIQ is to create an intelligent knowledge management system that simplifies data ingestion, improves organization, and delivers accurate information to users.
+
+
+### How?
+#### Milestone 1:
+Build a service that can be run locally (or in cloud in future) that ingests data into a vector db
+#### Milestone 2: 
+Build contextual querying mechanism on top of data stored in the vector db
+#### Milestone 3:
+Integration with LLM to pass the queries and contextual data to get meaningful result
+
