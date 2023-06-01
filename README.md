@@ -35,7 +35,7 @@ The goal of InsightIQ is to create an intelligent knowledge management system th
 ## How?
 #### Milestone 1:
 Build a service that can be run locally (or in cloud in future) that ingests data into a vector db
-#### Milestone 2: 
+#### Milestone 2:
 Build contextual querying mechanism on top of data stored in the vector db
 #### Milestone 3:
 Integration with LLM to pass the queries and contextual data to get meaningful result
@@ -43,7 +43,7 @@ Integration with LLM to pass the queries and contextual data to get meaningful r
 
 ## Current state:
 #### Git tag v0.1: ChatGPT integration complete
-1. Setup `OPENAI_API_KEY` environment variable 
+1. Setup `OPENAI_API_KEY` environment variable
 2. Run the SpringBoot server by running command `./gradlew run`
 3. A `test` thread is created by default for now
 4. Run below curl command to make a call to ChatGPT.
@@ -52,4 +52,14 @@ Integration with LLM to pass the queries and contextual data to get meaningful r
     "message": "Why do programmers prefer dark mode? Because light attracts bugs?",
     "threadId": "test"
     }' http://localhost:3001/chat/message
+   ```
+#### Run the server in Docker
+1. Set the API key in as the env variable following the [best practices](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety) by OpenAI
+2. In the project root directory run below command to build the docker image.
+   ```shell
+   docker build --tag insightiq .
+   ```
+3. Run the image in Docker container using below command:
+   ```shell
+   docker run -e OPENAI_API_KEY=$OPENAI_API_KEY --publish 3001:3001 insightiq:latest
    ```

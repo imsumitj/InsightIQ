@@ -7,7 +7,7 @@ import java.sql.DriverManager
 
 @Repository
 class SqlLiteChatRepository : ChatRepository {
-    private val connection: Connection = DriverManager.getConnection("jdbc:sqlite:store/chat_history.db")
+    private val connection: Connection = DriverManager.getConnection("jdbc:sqlite:chat_history.db")
 
     init {
         createChatHistoryTable()
